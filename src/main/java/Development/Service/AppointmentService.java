@@ -47,7 +47,7 @@ public class AppointmentService implements IAppointmentService{
         () -> new EntityNotFoundException("No existe cita con id: " + id)
         );
         
-        actualAppoint.setIdentificacion(obj.getFullName());
+        actualAppoint.setIdentificacion(obj.getIdentificacion());
         actualAppoint.setFullName(obj.getFullName());
         actualAppoint.setProfessionalName(obj.getProfessionalName());
         actualAppoint.setPhoneNumber(obj.getPhoneNumber());

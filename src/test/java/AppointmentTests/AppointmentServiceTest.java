@@ -45,10 +45,10 @@ class AppointmentServiceTest {
 
         appointment = new Appointment();
         appointment.setId("1");
-        appointment.setIdentificacion("123");
+        appointment.setIdentificacion(123);
         appointment.setFullName("Juan Perez");
         appointment.setProfessionalName("Doctor A");
-        appointment.setPhoneNumber("55555");
+        appointment.setPhoneNumber(55555);
         appointment.setGender(Gender.MALE);
         appointment.setDate(LocalDate.now());
         appointment.setTime(LocalTime.of(10, 0));
@@ -111,7 +111,7 @@ class AppointmentServiceTest {
         CreateAppointDTO dto = new CreateAppointDTO();
         dto.setFullName("Carlos Ruiz");
         dto.setProfessionalName("Doctor B");
-        dto.setPhoneNumber("99999");
+        dto.setPhoneNumber(99999);
         dto.setGender(Gender.FEMALE);
         dto.setDate(LocalDate.now().plusDays(1));
         dto.setTime(LocalTime.NOON);

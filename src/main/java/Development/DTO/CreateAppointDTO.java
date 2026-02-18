@@ -20,13 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateAppointDTO {
     
-    private String identificacion;
+    private long identificacion;
     
     private String fullName;
     
     private String professionalName;
     
-    private String phoneNumber;
+    private long phoneNumber;
     
     private Gender gender;
     
