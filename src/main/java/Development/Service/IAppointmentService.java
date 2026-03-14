@@ -4,8 +4,10 @@
  */
 package Development.Service;
 
-import Development.DTO.CreateAppointDTO;
+import Development.DTOs.AvailableDateDTO;
+import Development.DTOs.CreateAppointDTO;
 import Development.Model.Appointment;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -14,9 +16,10 @@ import java.util.List;
  */
 public interface IAppointmentService {
     public List<Appointment> listAppointments();
-    public Appointment createAppoint(Appointment obj);
-    public Appointment updateAppoint(String id, CreateAppointDTO obj);
+    public Appointment createAppoint(String userId, CreateAppointDTO dto);
+    //public void updateAppoint(String id, UpAppointDTO obj);
     public void deleteAppoint(String id);
+    public List<AvailableDateDTO> getAvailableSlotsForWeek();
     
     
 }

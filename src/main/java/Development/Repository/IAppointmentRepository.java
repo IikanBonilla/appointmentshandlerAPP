@@ -7,6 +7,7 @@ package Development.Repository;
 import Development.Model.Appointment;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -16,6 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IAppointmentRepository extends JpaRepository<Appointment, String>{
     
     public boolean existsByDateAndTime(LocalDate date, LocalTime time);
-
     
+    public List<Appointment> findByDate(LocalDate date);
 }
