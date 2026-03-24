@@ -11,12 +11,14 @@ import Development.Model.Appointment;
 import Development.Model.User;
 import Development.Repository.IAppointmentRepository;
 import Development.Repository.IUserRepository;
+import Events.AppointmentCreatedEvent;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 /**
@@ -34,6 +36,10 @@ public class AppointmentService implements IAppointmentService{
     
     @Autowired
     private IUserRepository userRepository;
+    
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+    
 
     @Override
     public List<Appointment> listAppointments() {
@@ -51,7 +57,7 @@ public class AppointmentService implements IAppointmentService{
         );
                 
         if(appointmentRepository.existsByDateAndTime(dto.getDate(), dto.getTime())){
-            throw new IllegalArgumentException("Ya existe una cita para es hora y fecha");
+            throw new IllegalArgumentException("Ya existe una cita para esa hora y fecha");
         }
         
         try{
@@ -65,7 +71,12 @@ public class AppointmentService implements IAppointmentService{
                 app.setTime(dto.getTime());
                 app.setUser(user); // Asumiendo que recibes el usuario en el DTO
             
-            return appointmentRepository.save(app);
+                Appointment savedAppointment = appointmentRepository.save(app);
+                
+                //Publicar el evento después de guardar exitosamente
+                eventPublisher.publishEvent(new AppointmentCreatedEvent(this, savedAppointment, user.getEmail()));
+                
+            return savedAppointment;
         }catch(Exception ex){
             throw new RuntimeException("Error al crear cita: " + ex.getMessage());
         }
@@ -103,7 +114,7 @@ public class AppointmentService implements IAppointmentService{
     private List<LocalTime> generatePossibleTimes(){
         List<LocalTime> times = new ArrayList<>();
         LocalTime start = LocalTime.of(7, 0); //7:00 AM
-        LocalTime end = LocalTime.of(18, 0); //6:00 pm
+        LocalTime end = LocalTime.of(13, 0); //1:00 pm
         
         LocalTime current = start;
         while(!current.isAfter(end)){

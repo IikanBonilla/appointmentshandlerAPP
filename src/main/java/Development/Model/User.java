@@ -34,6 +34,8 @@ public class User {
     
     private String fullName;
     
+    private String email;
+    
     @Enumerated(EnumType.STRING)
     private Role role;
     
