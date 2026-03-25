@@ -43,6 +43,8 @@ public class Appointment{
     
     private String phoneNumber;
     
+    private String email;
+    
     @Enumerated(EnumType.STRING)
     private Gender gender;
     
