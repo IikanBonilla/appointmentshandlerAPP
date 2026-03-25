@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Events;
+package Development.Events;
 
 import Development.DTOs.EmailBodyDTO;
 import Development.Model.Appointment;

@@ -55,6 +55,12 @@
                     <artifactId>spring-boot-starter-web</artifactId>
                 </dependency>
                 
+                <!-- Email dependecy -->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-mail</artifactId>
+                </dependency>
+                
                 <!-- SQLite dependecy -->
                 <dependency>
                     <groupId>org.xerial</groupId>

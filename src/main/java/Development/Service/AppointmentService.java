@@ -11,7 +11,7 @@ import Development.Model.Appointment;
 import Development.Model.User;
 import Development.Repository.IAppointmentRepository;
 import Development.Repository.IUserRepository;
-import Events.AppointmentCreatedEvent;
+import Development.Events.AppointmentCreatedEvent;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
