@@ -20,6 +20,8 @@ public interface IAppointmentService {
     //public void updateAppoint(String id, UpAppointDTO obj);
     public void deleteAppoint(String id);
     public List<AvailableDateDTO> getAvailableSlotsForWeek();
-    
+    public List<Appointment> findAllForSpecificDate(LocalDate date);
+    public List<Appointment> findForSpecificDateAndUser(String userId, LocalDate date);
+    public List<Appointment> findByUser(String userId);
     
 }

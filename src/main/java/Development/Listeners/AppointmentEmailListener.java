@@ -4,6 +4,7 @@
  */
 package Development.Listeners;
 
+import Development.Config.EmailConfig;
 import Development.DTOs.EmailBodyDTO;
 import Development.Service.EmailService;
 import Development.Events.AppointmentCreatedEvent;
@@ -22,10 +23,12 @@ public class AppointmentEmailListener {
     @Autowired
     private EmailService emailService;
     
+    @Autowired
+    private EmailConfig emailconfig;
     
     @EventListener
     public void handleAppointmentCreated(AppointmentCreatedEvent event){
-        
+  
         //Extraer la información del evento
         var appointment = event.getAppointment();
         var clientEmail = event.getClientEmail();

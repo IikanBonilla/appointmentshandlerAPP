@@ -25,6 +25,14 @@ public class UserDetail implements UserDetails{
     @Autowired
     private User user;
     
+    public User getUser() {
+        return user;
+    }
+    
+    public String getUserId() {
+        return user.getId();
+    }
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("Role_" + user.getRole().name()));

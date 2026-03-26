@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 /nbproject/
+
+# OS generated files #
+*.db

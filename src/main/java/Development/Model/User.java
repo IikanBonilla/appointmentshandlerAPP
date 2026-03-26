@@ -4,6 +4,7 @@
  */
 package Development.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Status status; 
     
+    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Appointment> appointments = new ArrayList<>();
     

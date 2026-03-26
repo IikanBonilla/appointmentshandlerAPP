@@ -4,6 +4,7 @@
  */
 package Development.Service;
 
+import Development.Config.EmailConfig;
 import Development.DTOs.AvailableDateDTO;
 import Development.DTOs.CreateAppointDTO;
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ import Development.Repository.IUserRepository;
 import Development.Events.AppointmentCreatedEvent;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +30,6 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@PreAuthorize("hasAnyRole('DOCTOR', 'THERAPIST')")
 public class AppointmentService implements IAppointmentService{
     
     @Autowired
@@ -40,7 +41,9 @@ public class AppointmentService implements IAppointmentService{
     @Autowired
     private ApplicationEventPublisher eventPublisher;
     
-
+    @Autowired
+    private EmailConfig emailConfig;
+    
     @Override
     public List<Appointment> listAppointments() {
         try{
@@ -66,15 +69,20 @@ public class AppointmentService implements IAppointmentService{
                 app.setFullName(dto.getFullName());
                 app.setProfessionalName(dto.getProfessionalName());
                 app.setPhoneNumber(dto.getPhoneNumber());
+                app.setBirthDate(dto.getBirthDate());
+                app.setEmail(dto.getEmail());
                 app.setGender(dto.getGender());
                 app.setDate(dto.getDate());
                 app.setTime(dto.getTime());
+                app.setObservation(dto.getObservation());
                 app.setUser(user); // Asumiendo que recibes el usuario en el DTO
             
                 Appointment savedAppointment = appointmentRepository.save(app);
                 
                 //Publicar el evento después de guardar exitosamente
-                eventPublisher.publishEvent(new AppointmentCreatedEvent(this, savedAppointment, user.getEmail()));
+                if(emailConfig.isEmailEnable()){
+                eventPublisher.publishEvent(new AppointmentCreatedEvent(this, savedAppointment, app.getEmail()));
+                }
                 
             return savedAppointment;
         }catch(Exception ex){
@@ -178,6 +186,52 @@ public class AppointmentService implements IAppointmentService{
         }
         
         return availability;
+    }
+
+    @Override
+    public List<Appointment> findAllForSpecificDate(LocalDate date) {
+            if (date == null) {
+            throw new IllegalArgumentException("La fecha no puede ser nula");
+            }
+            
+            try{
+                return appointmentRepository.findByDate(date);
+            }catch(Exception ex){ 
+                throw new RuntimeException("Error inesperado al buscar citas por fecha: " + ex.getMessage());
+                
+            }
+    }
+
+    @Override
+    public List<Appointment> findByUser(String userId){
+        
+        if(userId == null || userId.isEmpty()){
+            throw new IllegalArgumentException("El usuario no puede ser nulo");
+        }
+        try{
+            return appointmentRepository.findByUserId(userId);
+        }catch(Exception ex){
+            throw new RuntimeException("Error inesperado al cargar citas para el usuario: " + ex.getMessage());
+        }
+        
+    }
+
+    @Override
+    public List<Appointment> findForSpecificDateAndUser(String userId, LocalDate date) {
+        
+        if(userId == null || userId.isEmpty()){
+            throw new IllegalArgumentException("El usuario no puede ser nulo");
+        }
+        
+        if (date == null) {
+            throw new IllegalArgumentException("La fecha no puede ser nula");
+        }
+        
+        try{
+            return appointmentRepository.findByUserIdAndDate(userId, date);
+        }catch(Exception ex){
+            throw new RuntimeException("Error inesperado al cargar citas: " + ex.getMessage());
+        }
     }
     
     

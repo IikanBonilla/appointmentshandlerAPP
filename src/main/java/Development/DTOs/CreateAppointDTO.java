@@ -28,12 +28,17 @@ public class CreateAppointDTO {
     
     private String phoneNumber;
     
+    private LocalDate birthDate;
+    
     private String email;
     
     private Gender gender;
     
     private LocalDate date;
     
-    private LocalTime time;  
+    private LocalTime time; 
+    
+    private String observation;
+    
     
 }

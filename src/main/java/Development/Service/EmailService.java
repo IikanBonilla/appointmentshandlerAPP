@@ -23,9 +23,10 @@ public class EmailService implements IEmailService{
     @Override
     public void sendPlainTextEmail(EmailBodyDTO emailBody) {
         try{
-            sendPlainTextEmail(emailBody);
+            sendPlainTextMessage(emailBody);
+            System.out.println("✅ Email enviado a: " + emailBody.getTo());
         }catch(Exception ex){
-        
+            System.err.println("❌ Error al enviar email: " + ex.getMessage());
             throw new RuntimeException("Error al enviar email: " + ex.getMessage());
         
         }

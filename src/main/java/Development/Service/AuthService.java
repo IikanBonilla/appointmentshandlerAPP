@@ -10,6 +10,7 @@ import Development.DTOs.RegisterRequestDTO;
 import Development.Model.Role;
 import Development.Model.Status;
 import Development.Model.User;
+import Development.Model.UserDetail;
 import Development.Repository.IUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,8 @@ public class AuthService implements IAuthService{
                     )
             );
             
-            User user = (User) authentication.getPrincipal();
+            UserDetail userDetail = (UserDetail) authentication.getPrincipal();
+            User user = userDetail.getUser();
             
             return new AuthResponseDTO(
                     user.getId(),
@@ -80,6 +82,7 @@ public class AuthService implements IAuthService{
             userAdmin.setUserName(dto.getUserName());
             userAdmin.setPassword(passwordEncoder.encode(dto.getPassword()));
             userAdmin.setFullName(dto.getFullName());
+            userAdmin.setEmail(dto.getEmail());
             userAdmin.setRole(Role.SUPERADMIN);  
             userAdmin.setStatus(Status.ACTIVE);  // Activo por defecto
             userRepository.save(userAdmin);

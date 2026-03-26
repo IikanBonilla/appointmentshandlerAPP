@@ -5,6 +5,7 @@
 package Development.Model;
 
 import Development.Model.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,6 +46,8 @@ public class Appointment{
     
     private String phoneNumber;
     
+    private LocalDate birthDate;
+    
     private String email;
     
     @Enumerated(EnumType.STRING)
@@ -53,9 +57,11 @@ public class Appointment{
     
     private LocalTime time;  
     
+    private String observation;
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
   
-    
 }
