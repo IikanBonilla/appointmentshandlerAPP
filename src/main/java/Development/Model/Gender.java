@@ -4,10 +4,6 @@
  */
 package Development.Model;
 
-/**
- *
- * @author iikan
- */
 public enum Gender {
     MALE,
     FEMALE,
