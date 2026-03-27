@@ -12,6 +12,5 @@ public enum Role {
     DOCTOR,
     THERAPIST,
     SCHEDULER,
-    ADMIN,
-    SUPERADMIN
+    ADMIN
 }
