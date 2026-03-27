@@ -13,10 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-/**
- *
- * @author iikan
- */
 @Component
 public class AppointmentEmailListener {
     
@@ -59,7 +55,9 @@ public class AppointmentEmailListener {
             
             Estimado/a %s,
             
-            Su cita ha sido agendada exitosamente con los siguientes detalles:
+            Su cita ha sido agendada exitosamente. %s
+            
+            Detalles de su agendamiento: %s
             
             📅 Fecha: %s
             ⏰ Hora: %s
