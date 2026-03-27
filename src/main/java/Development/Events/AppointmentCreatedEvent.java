@@ -10,11 +10,6 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 
-/**
- *
- * @author iikan
- */
-
 @Getter
 public class AppointmentCreatedEvent extends ApplicationEvent{
     
