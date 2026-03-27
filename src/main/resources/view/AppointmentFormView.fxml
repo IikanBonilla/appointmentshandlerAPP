@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Development.frontend.controller.AppointmentFormController"
+      spacing="10" style="-fx-background-color: #f0f0f0;">
+    
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+    
+    <Label text="Agregar cita médica" 
+           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #000000;"/>
+    
+    <Separator/>
+    
+    <VBox spacing="15" style="-fx-border-color: #c0c0c0; -fx-border-width: 1; -fx-background-color: white; -fx-padding: 15;">
+        
+        <GridPane hgap="10" vgap="8">
+            <padding><Insets top="5" bottom="5"/></padding>
+            
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30"/>
+                <ColumnConstraints percentWidth="70"/>
+            </columnConstraints>
+            
+            <!-- No. Documento Identidad -->
+            <Label text="*No. Documento Identidad:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="identificacionField" promptText="Número de identificación"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"
+                       style="-fx-pref-width: 250px;"/>
+            
+            <!-- Nombres y apellidos -->
+            <Label text="*Nombres y apellidos:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="fullNameField" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                       style="-fx-pref-width: 300px;"/>
+            
+            <!-- Celular -->
+            <Label text="*Celular:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="phoneField" promptText="Número de contacto"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1"
+                       style="-fx-pref-width: 200px;"/>
+            
+            <!-- Email -->
+            <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="emailField" promptText="Correo electrónico"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"
+                       style="-fx-pref-width: 250px;"/>
+            
+            <!-- Género -->
+            <Label text="*Género:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <HBox spacing="15" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <RadioButton fx:id="masculinoRadio" text="Hombre">
+                    <toggleGroup><ToggleGroup fx:id="genderGroup"/></toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="femeninoRadio" text="Mujer" toggleGroup="$genderGroup"/>
+                <RadioButton fx:id="otroRadio" text="Otro" toggleGroup="$genderGroup"/>
+            </HBox>
+            
+            <!-- Fecha de Nacimiento -->
+            <Label text="Fecha Nac (dd/mm/aaaa):" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <HBox spacing="5" GridPane.rowIndex="5" GridPane.columnIndex="1">
+                <DatePicker fx:id="birthDatePicker" promptText="dd/mm/aaaa"
+                           style="-fx-pref-width: 120px;"/>
+                <Label text="Edad (años):"/>
+                <TextField fx:id="ageField" editable="false" text="0" 
+                          style="-fx-pref-width: 50px;"/>
+            </HBox>
+            
+            <!-- Profesional -->
+            <Label text="Profesional:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <TextField fx:id="professionalNameField" promptText="Nombre del médico/terapista"
+                       GridPane.rowIndex="6" GridPane.columnIndex="1"
+                       style="-fx-pref-width: 250px;"/>
+            
+            <!-- Fecha de cita -->
+            <Label text="*Fecha cita:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="datePicker" promptText="dd/mm/aaaa"
+                       GridPane.rowIndex="7" GridPane.columnIndex="1"
+                       style="-fx-pref-width: 150px;"/>
+            
+            <!-- Hora -->
+            <Label text="*Hora:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="timeCombo" promptText="HH:MM"
+                     GridPane.rowIndex="8" GridPane.columnIndex="1"
+                     style="-fx-pref-width: 120px;"/>
+            
+            <!-- Observación -->
+            <Label text="Observación:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+            <TextArea fx:id="observationArea" promptText="Observaciones adicionales"
+                      GridPane.rowIndex="9" GridPane.columnIndex="1"
+                      style="-fx-pref-height: 60px; -fx-pref-width: 300px;"/>
+            
+            <!-- Checkbox -->
+            <HBox GridPane.rowIndex="10" GridPane.columnIndex="1" spacing="5">
+                <CheckBox fx:id="saveToHistoryCheck" text="Guardar observación en la Historia Clínica"/>
+            </HBox>
+        </GridPane>
+        
+        <HBox spacing="10" alignment="CENTER">
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" maxWidth="25" maxHeight="25"/>
+            <Label fx:id="statusLabel" visible="false" style="-fx-text-fill: #333333;"/>
+        </HBox>
+        
+        <Separator/>
+        
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Cerrar" fx:id="cancelButton" onAction="#handleCancel"
+                    style="-fx-background-color: #e0e0e0; -fx-border-color: #a0a0a0; -fx-border-width: 1; -fx-padding: 5 15 5 15;"/>
+            <Button text="Guardar" fx:id="saveButton" onAction="#handleSave"
+                    style="-fx-background-color: #e0e0e0; -fx-border-color: #a0a0a0; -fx-border-width: 1; -fx-padding: 5 15 5 15; -fx-font-weight: bold;"/>
+        </HBox>
+        
+    </VBox>
+</VBox>
