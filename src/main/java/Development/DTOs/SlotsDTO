@@ -1,0 +1,29 @@
+package com.groupsoft.appointment_scheduler.application.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+
+public class SlotDTO {
+
+    private LocalDateTime fechaHora;
+    private boolean disponible;
+
+    public SlotDTO(LocalDateTime fechaHora, boolean disponible) {
+        this.fechaHora = fechaHora;
+        this.disponible = disponible;
+    }
+
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+}
