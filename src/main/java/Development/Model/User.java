@@ -12,11 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-/**
- *
- * @author iikan
- */
 @Entity
 @Table(name = "user_table")
 @Data
