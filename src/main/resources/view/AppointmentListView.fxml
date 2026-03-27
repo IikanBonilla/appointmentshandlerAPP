@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Development.frontend.controller.AppointmentListController"
+      spacing="10" style="-fx-background-color: #f5f5f5;">
+    
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    
+    <MenuBar>
+        <Menu text="Opciones">
+            <MenuItem text="Configuración" />
+            <SeparatorMenuItem />
+            <MenuItem text="Salir" onAction="#handleLogout" />
+        </Menu>
+        <Menu text="Informes">
+            <MenuItem text="Reporte de citas" />
+            <MenuItem text="Estadísticas" />
+        </Menu>
+        <Menu text="Ayuda">
+            <MenuItem text="Acerca de" />
+        </Menu>
+    </MenuBar>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label fx:id="professionalNameLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;">
+            <font><Font size="14" /></font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Label text="Agendar citas médicas" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2980b9;" />
+    </HBox>
+    
+    <Separator />
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="prevDayButton" text="◀" style="-fx-font-size: 14px; -fx-min-width: 35px;" />
+        <Label fx:id="dateLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-min-width: 200px; -fx-alignment: center;" />
+        <Button fx:id="nextDayButton" text="▶" style="-fx-font-size: 14px; -fx-min-width: 35px;" />
+        <Button fx:id="todayButton" text="Hoy" style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+    </HBox>
+    
+    <HBox alignment="CENTER_RIGHT">
+        <Label fx:id="totalCitasLabel" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+    </HBox>
+    
+    <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS" style="-fx-font-size: 12px;">
+        <columns>
+            <TableColumn text="Hora" fx:id="colTime" prefWidth="70" />
+            <TableColumn text="No docum." fx:id="colDocument" prefWidth="100" />
+            <TableColumn text="Celular" fx:id="colPhone" prefWidth="100" />
+            <TableColumn text="Nombre completo" fx:id="colFullName" prefWidth="180" />
+            <TableColumn text="Email" fx:id="colEmail" prefWidth="150" />
+            <TableColumn text="Edad" fx:id="colAge" prefWidth="50" />
+            <TableColumn text="Observación" fx:id="colObservation" prefWidth="200" />
+        </columns>
+        <placeholder>
+            <Label text="No hay citas para este día" style="-fx-text-fill: #999; -fx-font-style: italic;" />
+        </placeholder>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <ProgressIndicator fx:id="loadingIndicator" visible="false" maxWidth="20" maxHeight="20" />
+        <Label fx:id="statusLabel" visible="false" style="-fx-font-size: 11px;" />
+    </HBox>
+    
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button fx:id="newAppointmentButton" text="Nueva" 
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-min-width: 80px;" />
+        <Button fx:id="exportButton" text="Exportar" 
+                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-min-width: 80px;" />
+        <Button text="Historia Clinica" 
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-min-width: 100px;" />
+        <Button fx:id="closeButton" text="Cerrar" 
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-min-width: 80px;" />
+    </HBox>
+    
+</VBox>
